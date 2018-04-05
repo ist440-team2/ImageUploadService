@@ -8,7 +8,6 @@ public class RequestObject {
 	private String operation;
 	private String base64image;
 	private String user;
-	private String requestId;
 
 	public RequestObject() {
 		super();
@@ -36,14 +35,6 @@ public class RequestObject {
 
 	public void setUser(String user) {
 		this.user = user;
-	}
-
-	public String getRequestId() {
-		return requestId;
-	}
-
-	public void setRequestId(String requestId) {
-		this.requestId = requestId;
 	}
 
 }

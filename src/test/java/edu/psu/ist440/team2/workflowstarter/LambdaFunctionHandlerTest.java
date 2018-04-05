@@ -52,7 +52,6 @@ public class LambdaFunctionHandlerTest {
 		input.setOperation("operation");
 		input.setUser(EXPECTED_USER);
 		input.setBase64image(IMAGE_BASE64);
-		input.setRequestId("asdfasf");
 
 		ResponseObject result = handler.handleRequest(input, ctx);
 		long timeDiff = ChronoUnit.SECONDS.between(ZonedDateTime.now(ZoneId.of("UTC")),
