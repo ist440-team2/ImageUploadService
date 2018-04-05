@@ -1,10 +1,9 @@
 package edu.psu.ist440.team2.workflowstarter;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Base64;
 import java.util.UUID;
 
@@ -16,17 +15,29 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 
-public class LambdaFunctionHandler implements RequestHandler<RequestObject, String> {
+public class LambdaFunctionHandler implements RequestHandler<RequestObject, ResponseObject> {
 
-	private static final String MESSAGE_FORMAT = "Operation: %sUser: %s%nRequest Id: %s%n%n %s";
 	private static final String BUCKET = "ist440grp2-images";
+	
+	private String key;
+	private String jobId;
 
 	@Override
-	public String handleRequest(RequestObject input, Context context) {
+	public ResponseObject handleRequest(RequestObject input, Context context) {
 
-		saveImage(input.getBase64image(), input.getUser());
-		return String.format(MESSAGE_FORMAT, input.getOperation(), input.getUser(), input.getRequestId(),
-				input.getBase64image());
+		ResponseObject resultObject = new ResponseObject();
+		
+		jobId = UUID.randomUUID().toString();
+		key = String.format("%s_%s.%s", input.getUser(), jobId, "png");
+		saveImage(input.getBase64image());
+		
+		resultObject.setBucket(BUCKET);
+		resultObject.setKey(key);
+		resultObject.setCreatedDate(ZonedDateTime.now(ZoneId.of("UTC")));
+		resultObject.setJobId(jobId);
+		resultObject.setUserId(input.getUser());
+		
+		return resultObject;
 	}
 
 	/**
@@ -37,9 +48,8 @@ public class LambdaFunctionHandler implements RequestHandler<RequestObject, Stri
 	 * @param userId
 	 *            the userId associated with the request
 	 */
-	private void saveImage(String base64, String userId) {
+	private void saveImage(String base64) {
 		AmazonS3 s3client = AmazonS3ClientBuilder.standard().withRegion(Regions.US_EAST_1).build();
-		String key = String.format("%s_%s.%s", userId, UUID.randomUUID(), "png");
 
 		byte[] imageData = Base64.getDecoder().decode(base64);
 		InputStream in = new ByteArrayInputStream(imageData);
@@ -52,4 +62,10 @@ public class LambdaFunctionHandler implements RequestHandler<RequestObject, Stri
 		s3client.putObject(objectRequest);
 	}
 
+	/**
+	 * Calls the start workflow API
+	 */
+	private void startWorkflow() {
+		
+	}
 }

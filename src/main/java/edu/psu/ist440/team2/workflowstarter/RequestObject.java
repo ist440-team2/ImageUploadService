@@ -1,5 +1,9 @@
 package edu.psu.ist440.team2.workflowstarter;
 
+/**
+ * POJO class for the request (input) object
+ *
+ */
 public class RequestObject {
 	private String operation;
 	private String base64image;
