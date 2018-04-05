@@ -1,4 +1,4 @@
-package edu.psu.ist440.team2.workflowstarter;
+package edu.psu.ist440.team2.imageuploadservice;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;

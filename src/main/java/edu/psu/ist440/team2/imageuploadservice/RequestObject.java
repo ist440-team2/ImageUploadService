@@ -1,4 +1,4 @@
-package edu.psu.ist440.team2.workflowstarter;
+package edu.psu.ist440.team2.imageuploadservice;
 
 /**
  * POJO class for the request (input) object

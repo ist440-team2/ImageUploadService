@@ -13,6 +13,10 @@ import org.junit.Test;
 
 import com.amazonaws.services.lambda.runtime.Context;
 
+import edu.psu.ist440.team2.imageuploadservice.LambdaFunctionHandler;
+import edu.psu.ist440.team2.imageuploadservice.RequestObject;
+import edu.psu.ist440.team2.imageuploadservice.ResponseObject;
+
 /**
  * A simple test harness for locally invoking your Lambda function handler.
  */
