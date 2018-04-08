@@ -60,8 +60,8 @@ public class LambdaFunctionHandlerTest {
 		assertNotNull(result);
 		assertTrue(String.format("Time difference was %d", timeDiff), timeDiff <= 5); // created date should be less
 																						// than 5s before now
-		assertEquals(EXPECTED_BUCKET, result.getBucket());
+		assertEquals(EXPECTED_BUCKET, result.getUploadedImageInfo().getBucket());
 		assertEquals(EXPECTED_USER, result.getUserId());
-		assertTrue(result.getKey().startsWith(EXPECTED_USER));
+		assertTrue(result.getUploadedImageInfo().getKey().startsWith(EXPECTED_USER));
 	}
 }

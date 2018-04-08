@@ -15,6 +15,8 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 
+import edu.psu.ist440.team2.imageuploadservice.ResponseObject.UploadedImageInfo;
+
 public class LambdaFunctionHandler implements RequestHandler<RequestObject, ResponseObject> {
 
 	private static final String BUCKET = "ist440grp2-images";
@@ -25,19 +27,20 @@ public class LambdaFunctionHandler implements RequestHandler<RequestObject, Resp
 	@Override
 	public ResponseObject handleRequest(RequestObject input, Context context) {
 
-		ResponseObject resultObject = new ResponseObject();
+		ResponseObject responseObject = new ResponseObject();
+		UploadedImageInfo uii = new UploadedImageInfo();
 		
 		jobId = UUID.randomUUID().toString();
 		key = String.format("%s_%s.%s", input.getUser(), jobId, "png");
 		saveImage(input.getBase64image());
-		
-		resultObject.setBucket(BUCKET);
-		resultObject.setKey(key);
-		resultObject.setCreatedDate(ZonedDateTime.now(ZoneId.of("UTC")));
-		resultObject.setJobId(jobId);
-		resultObject.setUserId(input.getUser());
-		
-		return resultObject;
+
+		responseObject.setCreatedDate(ZonedDateTime.now(ZoneId.of("UTC")));
+		responseObject.setJobId(jobId);
+		responseObject.setUserId(input.getUser());
+		uii.setBucket(BUCKET);
+		uii.setKey(key);
+		responseObject.setUploadedImageInfo(uii);
+		return responseObject;
 	}
 
 	/**
