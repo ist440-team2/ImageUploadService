@@ -1,4 +1,4 @@
-package edu.psu.ist440.team2.workflowstarter;
+package edu.psu.ist440.team2.imageuploadservice;
 
 import com.amazonaws.services.lambda.runtime.ClientContext;
 import com.amazonaws.services.lambda.runtime.CognitoIdentity;

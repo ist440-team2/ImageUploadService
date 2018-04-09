@@ -1,4 +1,4 @@
-package edu.psu.ist440.team2.workflowstarter;
+package edu.psu.ist440.team2.imageuploadservice;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -24,7 +24,6 @@ public class LambdaFunctionHandlerTest {
 
 	private static final String EXPECTED_BUCKET = "ist440grp2-images";
 	private static final String EXPECTED_USER = "testUser";
-	private static final String MESSAGE_FORMAT = "Operation: %sUser: %s%nRequest Id: %s%n%n %s";
 	private static final String IMAGE_BASE64 = "iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAQAAAD8x0bcAAAAvUlEQVR4AZ2ShW3FQBAFp4FAA8EC/jcV5A7CSXtbiFEQpg6S1Z5k5nlmz/GxjVgzwRMBIBqIuGeAYwq+CUwK+SHlsK/AuWmFXTNO3ddmQ4UqTvvT5JwBF5TcURHwXWmvvFTKJ3sY0kRjdbaVGEGsoVeEX43wao2KJu5KL6OSEdqIzjrNeTSI+HGDto6/ViP9wqfintSUCzcF1UhzrmlwCFzaoHPNp9OG5tzNi2g8vshN6XHHvuq4z/X2rTLOP8RxXOAVkvAYAAAAAElFTkSuQmCC";
 
 	private static RequestObject input;
