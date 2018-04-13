@@ -5,7 +5,7 @@ package edu.psu.ist440.team2.imageuploadservice;
  *
  */
 public class RequestObject {
-	private String operation;
+	private String type;
 	private String base64image;
 	private String user;
 
@@ -13,12 +13,12 @@ public class RequestObject {
 		super();
 	}
 
-	public String getOperation() {
-		return operation;
+	public String getType() {
+		return type;
 	}
 
-	public void setOperation(String operation) {
-		this.operation = operation;
+	public void setType(String operation) {
+		this.type = operation;
 	}
 
 	public String getBase64image() {

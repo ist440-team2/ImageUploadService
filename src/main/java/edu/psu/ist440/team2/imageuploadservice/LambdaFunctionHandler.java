@@ -43,9 +43,11 @@ public class LambdaFunctionHandler implements RequestHandler<RequestObject, Resp
 		ResponseObject responseObject = new ResponseObject();
 		UploadedImageInfo uii = new UploadedImageInfo();
 		ZonedDateTime createdDate = ZonedDateTime.now(ZoneId.of("UTC"));
+		String fileType = (input.getType().isEmpty()) ? "png" : input.getType();
+		
 
 		jobId = UUID.randomUUID().toString();
-		key = String.format("%s_%s.%s", input.getUser(), jobId, "png");
+		key = String.format("%s_%s.%s", input.getUser(), jobId, fileType);
 		saveImage(input.getBase64image());
 
 		startWorkflow(input.getUser(), jobId, createdDate.toString(), "QUEUED", key);

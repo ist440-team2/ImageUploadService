@@ -48,7 +48,7 @@ public class LambdaFunctionHandlerTest {
 		LambdaFunctionHandler handler = new LambdaFunctionHandler();
 		Context ctx = createContext();
 
-		input.setOperation("operation");
+		input.setType("png");
 		input.setUser(EXPECTED_USER);
 		input.setBase64image(IMAGE_BASE64);
 
