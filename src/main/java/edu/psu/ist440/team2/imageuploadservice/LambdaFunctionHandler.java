@@ -43,7 +43,7 @@ public class LambdaFunctionHandler implements RequestHandler<RequestObject, Resp
 		ResponseObject responseObject = new ResponseObject();
 		UploadedImageInfo uii = new UploadedImageInfo();
 		ZonedDateTime createdDate = ZonedDateTime.now(ZoneId.of("UTC"));
-		String fileType = (input.getType().isEmpty()) ? "png" : input.getType();
+		String fileType = (input.getType() == null || input.getType().isEmpty()) ? "png" : input.getType();
 		
 
 		jobId = UUID.randomUUID().toString();

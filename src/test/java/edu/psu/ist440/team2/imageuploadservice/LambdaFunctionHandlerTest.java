@@ -63,4 +63,24 @@ public class LambdaFunctionHandlerTest {
 		assertEquals(EXPECTED_USER, result.getUserId());
 		assertTrue(result.getUploadedImageInfo().getKey().startsWith(EXPECTED_USER));
 	}
+	
+	@Test
+	public void testLambdaFunctionHandlerNullType() {
+		LambdaFunctionHandler handler = new LambdaFunctionHandler();
+		Context ctx = createContext();
+
+		input.setUser(EXPECTED_USER);
+		input.setBase64image(IMAGE_BASE64);
+
+		ResponseObject result = handler.handleRequest(input, ctx);
+		long timeDiff = ChronoUnit.SECONDS.between(ZonedDateTime.now(ZoneId.of("UTC")),
+				ZonedDateTime.parse(result.getCreatedDate()));
+
+		assertNotNull(result);
+		assertTrue(String.format("Time difference was %d", timeDiff), timeDiff <= 5); // created date should be less
+																						// than 5s before now
+		assertEquals(EXPECTED_BUCKET, result.getUploadedImageInfo().getBucket());
+		assertEquals(EXPECTED_USER, result.getUserId());
+		assertTrue(result.getUploadedImageInfo().getKey().startsWith(EXPECTED_USER));
+	}
 }
